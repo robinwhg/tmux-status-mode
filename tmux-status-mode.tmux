@@ -36,11 +36,11 @@ declare -r \
   section_y_config="@section_y" \
   section_z_config="@section_z" \
   section_a_default=" ${mode_indicator_placeholder:1} " \
-  section_b_default=" Section B " \
-  section_c_default=" Section C " \
-  section_x_default=" Section X " \
-  section_y_default=" Section Y " \
-  section_z_default=" Section Z "
+  section_b_default=" #S " \
+  section_c_default="" \
+  section_x_default=" \"#{=22:pane_title}\" " \
+  section_y_default=" %H:%M " \
+  section_z_default=" %d-%b-%y "
 
 get_option_value() {
   local -r config=$(tmux show-option -gqv "$1")
