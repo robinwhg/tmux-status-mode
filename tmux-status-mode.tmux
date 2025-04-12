@@ -18,6 +18,7 @@ declare -r \
 
 # Mode colors
 declare -r \
+  mode_color_placeholder="\#{mode_color}" \
   normal_mode_color_config="@normal_mode_color" \
   prefix_mode_color_config="@prefix_mode_color" \
   copy_mode_color_config="@copy_mode_color" \
