@@ -2,7 +2,7 @@
 
 set -e
 
-# mode indicator
+# Mode indicator
 declare -r \
   normal_mode_indicator="TMUX" \
   prefix_mode_indicator="WAIT" \
@@ -14,35 +14,33 @@ declare -r \
   mode_indicator_placeholder="\#{mode_indicator}" \
   mode_indicator="#{?#{==:#{client_key_table},off},$nested_mode_indicator,#{?synchronize-panes,$sync_mode_indicator,#{?client_prefix,$prefix_mode_indicator,#{?pane_in_mode,$copy_mode_indicator,$normal_mode_indicator}}}}"
 
-# Possible configurations for colors
-declare -r normal_mode_color_config="@normal_mode_color"
-declare -r prefix_mode_color_config="@prefix_mode_color"
-declare -r copy_mode_color_config="@copy_mode_color"
-declare -r sync_mode_color_config="@sync_mode_color"
-declare -r nested_mode_color_config="@nested_mode_color"
+# Mode colors
+declare -r \
+  normal_mode_color_config="@normal_mode_color" \
+  prefix_mode_color_config="@prefix_mode_color" \
+  copy_mode_color_config="@copy_mode_color" \
+  sync_mode_color_config="@sync_mode_color" \
+  nested_mode_color_config="@nested_mode_color" \
+  normal_mode_color_default="blue" \
+  prefix_model_color_default="green" \
+  copy_mode_color_default="magenta" \
+  sync_mode_color_default="cyan" \
+  nested_mode_color_default="red"
 
-# Possible configurations for section content
-declare -r section_a_config="@section_a"
-declare -r section_b_config="@section_b"
-declare -r section_c_config="@section_c"
-declare -r section_x_config="@section_x"
-declare -r section_y_config="@section_y"
-declare -r section_z_config="@section_z"
-
-# Default colors
-declare -r normal_mode_color_default="blue"
-declare -r prefix_model_color_default="green"
-declare -r copy_mode_color_default="magenta"
-declare -r sync_mode_color_default="cyan"
-declare -r nested_mode_color_default="red"
-
-# Default section content
-declare -r section_a_default=" ${mode_indicator_placeholder:1} "
-declare -r section_b_default=" Section B "
-declare -r section_c_default=" Section C "
-declare -r section_x_default=" Section X "
-declare -r section_y_default=" Section Y "
-declare -r section_z_default=" Section Z "
+# Section content
+declare -r \
+  section_a_config="@section_a" \
+  section_b_config="@section_b" \
+  section_c_config="@section_c" \
+  section_x_config="@section_x" \
+  section_y_config="@section_y" \
+  section_z_config="@section_z" \
+  section_a_default=" ${mode_indicator_placeholder:1} " \
+  section_b_default=" Section B " \
+  section_c_default=" Section C " \
+  section_x_default=" Section X " \
+  section_y_default=" Section Y " \
+  section_z_default=" Section Z "
 
 get_option_value() {
   local -r config=$(tmux show-option -gqv "$1")
