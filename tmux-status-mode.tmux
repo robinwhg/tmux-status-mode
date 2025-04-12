@@ -2,6 +2,18 @@
 
 set -e
 
+# mode indicator
+declare -r \
+  normal_mode_indicator="TMUX" \
+  prefix_mode_indicator="WAIT" \
+  copy_mode_indicator="COPY" \
+  sync_mode_indicator="SYNC" \
+  nested_mode_indicator="NEST"
+
+declare -r \
+  mode_indicator_placeholder="\#{mode_indicator}" \
+  mode_indicator="#{?#{==:#{client_key_table},off},$nested_mode_indicator,#{?synchronize-panes,$sync_mode_indicator,#{?client_prefix,$prefix_mode_indicator,#{?pane_in_mode,$copy_mode_indicator,$normal_mode_indicator}}}}"
+
 # Possible configurations for colors
 declare -r normal_mode_color_config="@normal_mode_color"
 declare -r prefix_mode_color_config="@prefix_mode_color"
@@ -25,7 +37,7 @@ declare -r sync_mode_color_default="cyan"
 declare -r nested_mode_color_default="red"
 
 # Default section content
-declare -r section_a_default=" Section A "
+declare -r section_a_default=" ${mode_indicator_placeholder:1} "
 declare -r section_b_default=" Section B "
 declare -r section_c_default=" Section C "
 declare -r section_x_default=" Section X "
@@ -58,8 +70,12 @@ main() {
     section_y="#[fg=$(get_mode_color),bg=brightblack]$(get_option_value "$section_y_config" "$section_y_default")" \
     section_z="#[fg=black,bg=$(get_mode_color)]$(get_option_value "$section_z_config" "$section_z_default")"
 
-  tmux set-option -gq status-left "$section_a$section_b$section_c"
-  tmux set-option -gq status-right "$section_x$section_y$section_z"
+  local -r \
+    status_left="$section_a$section_b$section_c" \
+    status_right="$section_x$section_y$section_z"
+
+  tmux set-option -gq status-left "${status_left/$mode_indicator_placeholder/$mode_indicator}"
+  tmux set-option -gq status-right "${status_right/$mode_indicator_placeholder/$mode_indicator}"
 }
 
 main
