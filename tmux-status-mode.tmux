@@ -4,15 +4,17 @@ set -e
 
 # Mode indicator
 declare -r \
-  normal_mode_indicator="TMUX" \
-  prefix_mode_indicator="WAIT" \
-  copy_mode_indicator="COPY" \
-  sync_mode_indicator="SYNC" \
-  nested_mode_indicator="NEST"
-
-declare -r \
   mode_indicator_placeholder="\#{mode_indicator}" \
-  mode_indicator="#{?#{==:#{client_key_table},off},$nested_mode_indicator,#{?synchronize-panes,$sync_mode_indicator,#{?client_prefix,$prefix_mode_indicator,#{?pane_in_mode,$copy_mode_indicator,$normal_mode_indicator}}}}"
+  normal_mode_indicator_config="@normal_mode_indicator" \
+  prefix_mode_indicator_config="@prefix_mode_indicator" \
+  copy_mode_indicator_config="@copy_mode_indicator" \
+  sync_mode_indicator_config="@sync_mode_indicator" \
+  nested_mode_indicator_config="@sync_mode_indicator" \
+  normal_mode_indicator_default="TMUX" \
+  prefix_mode_indicator_default="WAIT" \
+  copy_mode_indicator_default="COPY" \
+  sync_mode_indicator_default="SYNC" \
+  nested_mode_indicator_default="NEST"
 
 # Mode colors
 declare -r \
@@ -71,6 +73,15 @@ main() {
   local -r \
     status_left="$section_a$section_b$section_c" \
     status_right="$section_x$section_y$section_z"
+
+  local -r \
+    normal_mode_indicator="$(get_option_value "$normal_mode_indicator_config" "$normal_mode_indicator_default")" \
+    prefix_mode_indicator="$(get_option_value "$prefix_mode_indicator_config" "$prefix_mode_indicator_default")" \
+    copy_mode_indicator="$(get_option_value "$copy_mode_indicator_config" "$copy_mode_indicator_default")" \
+    sync_mode_indicator="$(get_option_value "$sync_mode_indicator_config" "$sync_mode_indicator_default")" \
+    nested_mode_indicator="$(get_option_value "$nested_mode_indicator_config" "$nested_mode_indicator_default")"
+
+  local -r mode_indicator="#{?#{==:#{client_key_table},off},$nested_mode_indicator,#{?synchronize-panes,$sync_mode_indicator,#{?client_prefix,$prefix_mode_indicator,#{?pane_in_mode,$copy_mode_indicator,$normal_mode_indicator}}}}"
 
   tmux set-option -gq status-left "${status_left/$mode_indicator_placeholder/$mode_indicator}"
   tmux set-option -gq status-right "${status_right/$mode_indicator_placeholder/$mode_indicator}"
