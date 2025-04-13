@@ -40,7 +40,7 @@ declare -r \
   section_z_config="@section_z" \
   section_a_default=" ${mode_indicator_placeholder:1} " \
   section_b_default=" #S " \
-  section_c_default="" \
+  section_c_default=" " \
   section_x_default=" \"#{=22:pane_title}\" " \
   section_y_default=" %H:%M " \
   section_z_default=" %d-%b-%y "
