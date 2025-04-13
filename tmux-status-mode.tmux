@@ -86,6 +86,7 @@ main() {
 
   tmux set-option -gq status-left "${status_left/$mode_indicator_placeholder/$mode_indicator}"
   tmux set-option -gq status-right "${status_right/$mode_indicator_placeholder/$mode_indicator}"
+  tmux set-option -gq mode-style "fg=$(get_option_value "$copy_mode_color_config" "$copy_mode_color_default"),bg=brightblack"
 }
 
 main
