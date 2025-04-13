@@ -45,6 +45,13 @@ declare -r \
   section_y_default=" %H:%M " \
   section_z_default=" %d-%b-%y "
 
+# Section separators
+declare -r \
+  separator_left_config="@separator_left" \
+  separator_right_config="@separator_right" \
+  separator_left_default="" \
+  separator_right_default=""
+
 get_option_value() {
   local -r config=$(tmux show-option -gqv "$1")
   local -r default="$2"
@@ -65,15 +72,19 @@ get_mode_color() {
 main() {
   local -r \
     section_a="#[fg=black,bg=$(get_mode_color)]$(get_option_value "$section_a_config" "$section_a_default")" \
+    separator_ab="#[fg=$(get_mode_color),bg=brightblack]$(get_option_value "$separator_left_config" "$separator_left_default")" \
     section_b="#[fg=$(get_mode_color),bg=brightblack]$(get_option_value "$section_b_config" "$section_b_default")" \
+    separator_bc="#[fg=brightblack,bg=black]$(get_option_value "$separator_left_config" "$separator_left_default")" \
     section_c="#[fg=white,bg=black]$(get_option_value "$section_c_config" "$section_c_default")" \
     section_x="#[fg=white,bg=black]$(get_option_value "$section_x_config" "$section_x_default")" \
+    separator_xy="#[fg=brightblack,bg=black]$(get_option_value "$separator_right_config" "$separator_right_default")" \
     section_y="#[fg=$(get_mode_color),bg=brightblack]$(get_option_value "$section_y_config" "$section_y_default")" \
+    separator_yz="#[fg=$(get_mode_color),bg=brightblack]$(get_option_value "$separator_right_config" "$separator_right_default")" \
     section_z="#[fg=black,bg=$(get_mode_color)]$(get_option_value "$section_z_config" "$section_z_default")"
 
   local -r \
-    status_left="$section_a$section_b$section_c" \
-    status_right="$section_x$section_y$section_z"
+    status_left="$section_a$separator_ab$section_b$separator_bc$section_c" \
+    status_right="$section_x$separator_xy$section_y$separator_yz$section_z"
 
   local -r \
     normal_mode_indicator="$(get_option_value "$normal_mode_indicator_config" "$normal_mode_indicator_default")" \
