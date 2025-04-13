@@ -9,7 +9,7 @@ declare -r \
   prefix_mode_indicator_config="@prefix_mode_indicator" \
   copy_mode_indicator_config="@copy_mode_indicator" \
   sync_mode_indicator_config="@sync_mode_indicator" \
-  nested_mode_indicator_config="@sync_mode_indicator" \
+  nested_mode_indicator_config="@nested_mode_indicator" \
   normal_mode_indicator_default="TMUX" \
   prefix_mode_indicator_default="WAIT" \
   copy_mode_indicator_default="COPY" \
