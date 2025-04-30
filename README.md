@@ -58,6 +58,12 @@ Each sections holds its components e.g. tmux' current mode.
 
 ### Configuration
 
+The plugin uses your default foreground and background color, so you should set it:
+
+```bash
+set -g status-style "fg=white,bg=black"
+```
+
 The following configuration options are available. You don't need to copy the defaults.
 
 ```bash
@@ -79,6 +85,9 @@ set -g @section_z  " %d-%b-%y "
 # Section separators
 set -g @separator_left ""
 set -g @separator_right ""
+
+# Background color of Section B and Y
+set -g @section_by_bg "brightblack"
 
 # Mode indicator text
 set -g @normal_mode_indicator 'TMUX'

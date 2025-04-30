@@ -52,6 +52,11 @@ declare -r \
   separator_left_default="" \
   separator_right_default=""
 
+# Section color
+declare -r \
+  section_by_bg_config="@section_by_bg" \
+  section_by_bg_default="brightblack"
+
 get_option_value() {
   local -r config=$(tmux show-option -gqv "$1")
   local -r default="$2"
@@ -72,14 +77,14 @@ get_mode_color() {
 main() {
   local -r \
     section_a="#[fg=black,bg=$(get_mode_color)]$(get_option_value "$section_a_config" "$section_a_default")" \
-    separator_ab="#[fg=$(get_mode_color),bg=brightblack]$(get_option_value "$separator_left_config" "$separator_left_default")" \
-    section_b="#[fg=$(get_mode_color),bg=brightblack]$(get_option_value "$section_b_config" "$section_b_default")" \
-    separator_bc="#[fg=brightblack,bg=black]$(get_option_value "$separator_left_config" "$separator_left_default")" \
-    section_c="#[fg=white,bg=black]$(get_option_value "$section_c_config" "$section_c_default")" \
-    section_x="#[fg=white,bg=black]$(get_option_value "$section_x_config" "$section_x_default")" \
-    separator_xy="#[fg=brightblack,bg=black]$(get_option_value "$separator_right_config" "$separator_right_default")" \
-    section_y="#[fg=$(get_mode_color),bg=brightblack]$(get_option_value "$section_y_config" "$section_y_default")" \
-    separator_yz="#[fg=$(get_mode_color),bg=brightblack]$(get_option_value "$separator_right_config" "$separator_right_default")" \
+    separator_ab="#[fg=$(get_mode_color),bg=$(get_option_value "$section_by_bg_config" "$section_by_bg_default")]$(get_option_value "$separator_left_config" "$separator_left_default")" \
+    section_b="#[fg=$(get_mode_color),bg=$(get_option_value "$section_by_bg_config" "$section_by_bg_default")]$(get_option_value "$section_b_config" "$section_b_default")" \
+    separator_bc="#[fg=$(get_option_value "$section_by_bg_config" "$section_by_bg_default"),bg=default]$(get_option_value "$separator_left_config" "$separator_left_default")" \
+    section_c="#[fg=default,bg=default]$(get_option_value "$section_c_config" "$section_c_default")" \
+    section_x="#[fg=default,bg=default]$(get_option_value "$section_x_config" "$section_x_default")" \
+    separator_xy="#[fg=$(get_option_value "$section_by_bg_config" "$section_by_bg_default"),bg=default]$(get_option_value "$separator_right_config" "$separator_right_default")" \
+    section_y="#[fg=$(get_mode_color),bg=$(get_option_value "$section_by_bg_config" "$section_by_bg_default")]$(get_option_value "$section_y_config" "$section_y_default")" \
+    separator_yz="#[fg=$(get_mode_color),bg=$(get_option_value "$section_by_bg_config" "$section_by_bg_default")]$(get_option_value "$separator_right_config" "$separator_right_default")" \
     section_z="#[fg=black,bg=$(get_mode_color)]$(get_option_value "$section_z_config" "$section_z_default")"
 
   local -r \
