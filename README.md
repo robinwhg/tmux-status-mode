@@ -64,6 +64,13 @@ The plugin uses your default foreground and background color, so you should set 
 set -g status-style "fg=white,bg=black"
 ```
 
+You might need to set the length of the `status-left` and `status-right`:
+
+```bash
+set -g status-left-length "100"
+set -g status-right-length "100"
+```
+
 The following configuration options are available. You don't need to copy the defaults.
 
 ```bash
