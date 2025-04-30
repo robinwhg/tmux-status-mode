@@ -102,3 +102,13 @@ The `#{mode_indicator}` token can be used in your configuration to show the name
 ### Notes
 
 If you had some conflicting configurations set before, you may need to explicitly unset them for everything to work properly.
+
+### Recipes
+
+Style window-status to fit the aesthetic:
+
+```bash
+setw -g window-status-separator ""
+setw -g window-status-format " #I #W #F "
+setw -g window-status-current-format "#[fg=brightwhite,bg=default] #I #W #F "
+```
