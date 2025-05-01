@@ -25,7 +25,7 @@ declare -r \
   sync_mode_color_config="@sync_mode_color" \
   nested_mode_color_config="@nested_mode_color" \
   normal_mode_color_default="blue" \
-  prefix_model_color_default="green" \
+  prefix_mode_color_default="green" \
   copy_mode_color_default="magenta" \
   sync_mode_color_default="cyan" \
   nested_mode_color_default="red"
@@ -66,7 +66,7 @@ get_option_value() {
 get_mode_color() {
   local -r \
     normal_mode_color="$(get_option_value "$normal_mode_color_config" "$normal_mode_color_default")" \
-    prefix_mode_color="$(get_option_value "$prefix_mode_color_config" "$prefix_model_color_default")" \
+    prefix_mode_color="$(get_option_value "$prefix_mode_color_config" "$prefix_mode_color_default")" \
     copy_mode_color="$(get_option_value "$copy_mode_color_config" "$copy_mode_color_default")" \
     sync_mode_color="$(get_option_value "$sync_mode_color_config" "$sync_mode_color_default")" \
     nested_mode_color="$(get_option_value "$nested_mode_color_config" "$nested_mode_color_default")"
