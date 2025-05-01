@@ -115,8 +115,10 @@ The `#{mode_indicator}` token can be used in your configuration to show the name
 
 Style window-status to fit the aesthetic:
 
+The `#{mode_color}` token can be used in `window-status-current-style` or `window-status-current-format` to achieve this.
+
 ```bash
 setw -g window-status-separator ""
 setw -g window-status-format " #I #W #F "
-setw -g window-status-current-format "#[fg=brightwhite,bg=default] #I #W #F "
+setw -g window-status-current-style "fg=#{mode_color},bg=default"
 ```

@@ -103,6 +103,12 @@ main() {
   tmux set-option -gq status-left "${status_left/$mode_indicator_placeholder/$mode_indicator}"
   tmux set-option -gq status-right "${status_right/$mode_indicator_placeholder/$mode_indicator}"
   tmux set-option -gq mode-style "fg=$(get_option_value "$copy_mode_color_config" "$copy_mode_color_default"),bg=$(get_option_value "$section_by_bg_config" "$section_by_bg_default")"
+
+  local -r window_status_current_style="$(tmux show-option -gqv window-status-current-style)"
+  tmux set-option -gq window-status-current-style "${window_status_current_style/$mode_color_placeholder/$(get_mode_color)}"
+
+  local -r window_status_current_format="$(tmux show-option -gqv window-status-current-format)"
+  tmux set-option -gq window-status-current-format "${window_status_current_format/$mode_color_placeholder/$(get_mode_color)}"
 }
 
 main
