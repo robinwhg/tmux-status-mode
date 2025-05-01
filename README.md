@@ -108,7 +108,8 @@ The `#{mode_indicator}` token can be used in your configuration to show the name
 
 ### Notes
 
-If you had some conflicting configurations set before, you may need to explicitly unset them for everything to work properly.
+- If you had some conflicting configurations set before, you may need to explicitly unset them or restart tmux for everything to work properly.
+- The plugin also sets the `mode-style` to match the style of Section B and Y
 
 ### Recipes
 
