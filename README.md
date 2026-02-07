@@ -2,6 +2,8 @@
 
 Plugin that changes the status bar colors depending on the currently active [tmux](https://github.com/tmux/tmux) mode.
 
+![](screenshots/demo.gif)
+
 ![normal_mode](screenshots/normal_mode.png)
 ![prefix_mode](screenshots/prefix_mode.png)
 ![copy_mode](screenshots/copy_mode.png)
